@@ -28,6 +28,7 @@
 #include "displayapp/screens/BatteryInfo.h"
 #include "displayapp/screens/Steps.h"
 #include "displayapp/screens/PassKey.h"
+#include "displayapp/screens/Breath.h"
 #include "displayapp/screens/Error.h"
 
 #include "drivers/Cst816s.h"
@@ -486,6 +487,9 @@ void DisplayApp::LoadScreen(Apps app, DisplayApp::FullRefreshDirections directio
       break;
     case Apps::Steps:
       currentScreen = std::make_unique<Screens::Steps>(this, motionController, settingsController);
+      break;
+    case Apps::Breath:
+      currentScreen = std::make_unique<Screens::Breath>(this, motorController, *systemTask, brightnessController);
       break;
   }
   currentApp = app;
