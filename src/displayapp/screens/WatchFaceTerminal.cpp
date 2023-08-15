@@ -132,17 +132,42 @@ void WatchFaceTerminal::Refresh() {
       uint8_t day = dateTimeController.Day();
       lv_label_set_text_fmt(label_date, "[DATE]#007fff %04d-%02d-%02d#", short(year), char(month), char(day));
     }
+
+    int16_t current = hour * 60 + minute;
+    int16_t target_bed = 23 * 60 + 0;
+    int16_t target_awake = 7 * 60 + 15;
+
+    int16_t situation;
+    if (current > target_awake && current < target_bed) {
+      situation = current - target_bed;
+    }
+    else {
+      if (current > target_awake) {
+        situation = (1440 - current) + target_awake;
+      }
+      else {
+        situation = current - target_awake;
+      }
+    }
+
+    if (situation < 0) {
+      situation = situation * -1;
+    }
+
+    int16_t t_minute = situation % 60;
+    int16_t t_hour = (situation - t_minute) / 60;
+    lv_label_set_text_fmt(heartbeatValue, "[L_HR]#ee3311 %02d:%02d#", t_hour, t_minute);
   }
 
-  heartbeat = heartRateController.HeartRate();
-  heartbeatRunning = heartRateController.State() != Controllers::HeartRateController::States::Stopped;
-  if (heartbeat.IsUpdated() || heartbeatRunning.IsUpdated()) {
-    if (heartbeatRunning.Get()) {
-      lv_label_set_text_fmt(heartbeatValue, "[L_HR]#ee3311 %d bpm#", heartbeat.Get());
-    } else {
-      lv_label_set_text_static(heartbeatValue, "[L_HR]#ee3311 ---#");
-    }
-  }
+//  heartbeat = heartRateController.HeartRate();
+//  heartbeatRunning = heartRateController.State() != Controllers::HeartRateController::States::Stopped;
+//  if (heartbeat.IsUpdated() || heartbeatRunning.IsUpdated()) {
+//    if (heartbeatRunning.Get()) {
+//      lv_label_set_text_fmt(heartbeatValue, "[L_HR]#ee3311 %d bpm#", heartbeat.Get());
+//    } else {
+//      lv_label_set_text_static(heartbeatValue, "[L_HR]#ee3311 ---#");
+//    }
+//  }
 
   stepCount = motionController.NbSteps();
   if (stepCount.IsUpdated()) {
