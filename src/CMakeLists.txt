@@ -394,7 +394,6 @@ list(APPEND SOURCE_FILES
         displayapp/screens/Notifications.cpp
         displayapp/screens/Twos.cpp
         displayapp/screens/HeartRate.cpp
-        displayapp/screens/Motion.cpp
         displayapp/screens/FlashLight.cpp
         displayapp/screens/List.cpp
         displayapp/screens/CheckboxList.cpp
@@ -493,6 +492,8 @@ list(APPEND SOURCE_FILES
 
         buttonhandler/ButtonHandler.cpp
         touchhandler/TouchHandler.cpp
+
+        utility/Math.cpp
         )
 
 list(APPEND RECOVERY_SOURCE_FILES
@@ -558,6 +559,8 @@ list(APPEND RECOVERY_SOURCE_FILES
         components/fs/FS.cpp
         buttonhandler/ButtonHandler.cpp
         touchhandler/TouchHandler.cpp
+
+        utility/Math.cpp
         )
 
 list(APPEND RECOVERYLOADER_SOURCE_FILES
@@ -677,6 +680,7 @@ set(INCLUDE_FILES
         components/motor/MotorController.h
         buttonhandler/ButtonHandler.h
         touchhandler/TouchHandler.h
+        utility/Math.h
         )
 
 include_directories(
@@ -801,18 +805,18 @@ add_definitions(-DTARGET_DEVICE_NAME="${TARGET_DEVICE}")
 if(TARGET_DEVICE STREQUAL "PINETIME")
   add_definitions(-DDRIVER_PINMAP_PINETIME)
   add_definitions(-DCLOCK_CONFIG_LF_SRC=1) # XTAL
-elseif(TARGET_DEVICE STREQUAL "MOY-TFK5") # P8a
+elseif(TARGET_DEVICE STREQUAL "MOY_TFK5") # P8a
   add_definitions(-DDRIVER_PINMAP_P8)
   add_definitions(-DCLOCK_CONFIG_LF_SRC=1) # XTAL
-elseif(TARGET_DEVICE STREQUAL "MOY-TIN5") # P8a variant 2
+elseif(TARGET_DEVICE STREQUAL "MOY_TIN5") # P8a variant 2
   add_definitions(-DDRIVER_PINMAP_P8)
   add_definitions(-DCLOCK_CONFIG_LF_SRC=1) # XTAL
-elseif(TARGET_DEVICE STREQUAL "MOY-TON5") # P8b
+elseif(TARGET_DEVICE STREQUAL "MOY_TON5") # P8b
   add_definitions(-DDRIVER_PINMAP_P8)
   add_definitions(-DCLOCK_CONFIG_LF_SRC=0) # RC
   add_definitions(-DMYNEWT_VAL_BLE_LL_SCA=500)
   add_definitions(-DCLOCK_CONFIG_LF_CAL_ENABLED=1)
-elseif(TARGET_DEVICE STREQUAL "MOY-UNK") # P8b mirrored
+elseif(TARGET_DEVICE STREQUAL "MOY_UNK") # P8b mirrored
   add_definitions(-DDRIVER_PINMAP_P8)
   add_definitions(-DCLOCK_CONFIG_LF_SRC=0) # RC
   add_definitions(-DMYNEWT_VAL_BLE_LL_SCA=500)
