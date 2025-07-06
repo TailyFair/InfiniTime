@@ -22,6 +22,7 @@ namespace Pinetime {
       OnNewDay,
       OnNewHour,
       OnNewHalfHour,
+      OnNewFiveMinutes,
       OnChargingEvent,
       OnPairing,
       SetOffAlarm,

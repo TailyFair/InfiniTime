@@ -128,6 +128,15 @@ void DateTime::UpdateTime(uint32_t systickCounter, bool forceUpdate) {
     isHalfHourAlreadyNotified = false;
   }
 
+  if ((minute % 5 == 0) && !isFiveMinutesAlreadyNotified) {
+    isFiveMinutesAlreadyNotified = true;
+    if (systemTask != nullptr) {
+      systemTask->PushMessage(System::Messages::OnNewFiveMinutes);
+    }
+  } else if (minute % 5 != 0) {
+    isFiveMinutesAlreadyNotified = false;
+  }
+
   // Notify new day to SystemTask
   if (hour == 0 and not isMidnightAlreadyNotified) {
     isMidnightAlreadyNotified = true;
