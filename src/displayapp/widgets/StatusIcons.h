@@ -41,6 +41,7 @@ namespace Pinetime {
         lv_obj_t* bleIcon;
         lv_obj_t* alarmIcon;
         lv_obj_t* batteryPlug;
+        lv_obj_t* batteryPercentage;
         lv_obj_t* container;
       };
     }

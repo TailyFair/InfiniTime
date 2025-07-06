@@ -28,6 +28,9 @@ void StatusIcons::Create() {
 
   batteryIcon.Create(container);
 
+  batteryPercentage = lv_label_create(container, nullptr);
+  lv_label_set_text_fmt(batteryPercentage, "%i%%", batteryController.PercentRemaining());
+
   lv_obj_align(container, nullptr, LV_ALIGN_IN_TOP_RIGHT, 0, 0);
 }
 
@@ -41,6 +44,8 @@ void StatusIcons::Update() {
   if (batteryPercentRemaining.IsUpdated()) {
     auto batteryPercent = batteryPercentRemaining.Get();
     batteryIcon.SetBatteryPercentage(batteryPercent);
+
+    lv_label_set_text_fmt(batteryPercentage, "%i%%", batteryPercentRemaining);
   }
 
   alarmEnabled = alarmController.IsEnabled();
