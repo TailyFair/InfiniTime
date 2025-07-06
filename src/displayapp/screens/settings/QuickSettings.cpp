@@ -85,6 +85,14 @@ QuickSettings::QuickSettings(Pinetime::Applications::DisplayApp* app,
   lv_obj_set_style_local_text_font(lbl_btn, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &lv_font_sys_48);
   lv_label_set_text_static(lbl_btn, Symbols::chime);
 
+  if (settingsController.GetChimeOption() == Controllers::Settings::ChimesOption::None)
+  {
+    lv_obj_set_state(btn2, LV_STATE_DEFAULT);
+  }
+  else {
+    lv_obj_set_state(btn2, LV_STATE_CHECKED);
+  }
+
   btn3 = lv_btn_create(lv_scr_act(), nullptr);
   btn3->user_data = this;
   lv_obj_set_event_cb(btn3, ButtonEventHandler);
