@@ -66,6 +66,9 @@ namespace Pinetime {
 
         static constexpr const char* flashlight = "\xEF\x80\x8B";
         static constexpr const char* paintbrushLg = "\xEE\x90\x8A";
+
+        static constexpr const char* ble = "\xEE\x86\xA7";
+        static constexpr const char* chime = "\xEE\xA9\x9D";
       }
     }
   }
