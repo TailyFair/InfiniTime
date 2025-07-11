@@ -50,6 +50,9 @@ namespace Pinetime {
         Utility::DirtyValue<uint8_t> heartbeat {};
         Utility::DirtyValue<bool> heartbeatRunning {};
         Utility::DirtyValue<bool> notificationState {};
+
+        Utility::DirtyValue<uint8_t> batteryPercentRemaining {};
+
         Utility::DirtyValue<std::optional<Pinetime::Controllers::SimpleWeatherService::CurrentWeather>> currentWeather {};
 
         Utility::DirtyValue<std::chrono::time_point<std::chrono::system_clock, std::chrono::days>> currentDate;
@@ -64,6 +67,7 @@ namespace Pinetime {
         lv_obj_t* notificationIcon;
         lv_obj_t* weatherIcon;
         lv_obj_t* temperature;
+        lv_obj_t* batteryPercentage;
 
         Controllers::DateTime& dateTimeController;
         Controllers::NotificationManager& notificationManager;
@@ -71,6 +75,7 @@ namespace Pinetime {
         Controllers::HeartRateController& heartRateController;
         Controllers::MotionController& motionController;
         Controllers::SimpleWeatherService& weatherService;
+        const Pinetime::Controllers::Battery& batteryController;
 
         lv_task_t* taskRefresh;
         Widgets::StatusIcons statusIcons;
